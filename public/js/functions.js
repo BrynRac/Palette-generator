@@ -103,28 +103,51 @@ function randHue() {
 /////////////////////////////////
 /// Canvas ---------------------
 const canvasWrapper = document.querySelector(".canvas-wrapper");
+const jpgBtn = document.getElementById("jpgBtn");
+const pngBtn = document.getElementById("pngBtn");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = 500;
-canvas.height = 400;
 
-// arrange colors on canvas
-// send user to /colors
-// allow user to save image via jpg or png
+// save canvas as image via jpg or png
+canvasWrapper.addEventListener("click", e => {
+  let dataURL;
+  e.target === jpgBtn
+    ? ((dataURL = canvas.toDataURL("image/jpeg")), (jpgBtn.href = dataURL))
+    : "";
+  e.target === pngBtn
+    ? ((dataURL = canvas.toDataURL("image/png")), (pngBtn.href = dataURL))
+    : "";
+});
 
 function toggleCanvas() {
   // fill canvas with colors
-  ctx.fillStyle = canvasColors[0];
-  ctx.fillRect(0, 0, 500, 80);
-  ctx.fillStyle = canvasColors[1];
-  ctx.fillRect(0, 80, 500, 80);
-  ctx.fillStyle = canvasColors[2];
-  ctx.fillRect(0, 160, 500, 80);
-  ctx.fillStyle = canvasColors[3];
-  ctx.fillRect(0, 240, 500, 80);
-  ctx.fillStyle = canvasColors[4];
-  ctx.fillRect(0, 320, 500, 80);
+  console.log(canvasColors.length);
+  if (canvasColors.length === 4) {
+    canvas.height = 320;
+    ctx.fillStyle = canvasColors[0];
+    ctx.fillRect(0, 0, 500, 80);
+    ctx.fillStyle = canvasColors[1];
+    ctx.fillRect(0, 80, 500, 80);
+    ctx.fillStyle = canvasColors[2];
+    ctx.fillRect(0, 160, 500, 80);
+    ctx.fillStyle = canvasColors[3];
+    ctx.fillRect(0, 240, 500, 80);
+  } else {
+    canvas.height = 400;
+
+    ctx.fillStyle = canvasColors[0];
+    ctx.fillRect(0, 0, 500, 80);
+    ctx.fillStyle = canvasColors[1];
+    ctx.fillRect(0, 80, 500, 80);
+    ctx.fillStyle = canvasColors[2];
+    ctx.fillRect(0, 160, 500, 80);
+    ctx.fillStyle = canvasColors[3];
+    ctx.fillRect(0, 240, 500, 80);
+    ctx.fillStyle = canvasColors[4];
+    ctx.fillRect(0, 320, 500, 80);
+  }
 
   canvasActive
     ? ((canvasWrapper.style.display = "none"), (canvasActive = false))
@@ -804,7 +827,6 @@ export function newGrid(obj) {
     // Export colors and open canvas
     if (event.target.parentElement.id === "canvas-prompt") {
       canvasColors = obj.canvasColors;
-
       toggleCanvas();
     }
 
