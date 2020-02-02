@@ -453,6 +453,27 @@ button:focus {
   background-color: #2c394727;
 }
 
+.canvas-dropdown {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  pointer-events: none;
+}
+
+#canvas-prompt {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  bottom: 0px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  max-height: 0;
+  opacity: 0;
+}
+
 .gridtext {
   display: -webkit-box;
   display: -ms-flexbox;

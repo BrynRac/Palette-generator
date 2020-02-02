@@ -131,7 +131,7 @@ header {
       display: flex;
       align-items: center;
     }
-    
+
     input {
       width: 20px;
       height: 20px;
@@ -388,6 +388,25 @@ button:focus {
   }
 }
 
+// Canvas dropdown
+
+.canvas-dropdown {
+   
+  grid-column: 1;
+  grid-row: 1;
+  pointer-events: none;
+}
+#canvas-prompt {
+  grid-column: 1 / 2;
+  bottom: 0px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  max-height: 0;
+  opacity: 0;
+}
+
 .gridtext {
   display: flex;
   padding-bottom: 1em;
@@ -401,6 +420,7 @@ button:focus {
     background-color: color(menu);
   }
 
+  
   // Dropdown hover -------------------
 
   .schemeHover {

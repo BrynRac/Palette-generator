@@ -51,7 +51,8 @@ export function createGrid(gridContainer, bgContainer) {
     div.matches("div0") ||
     div.matches("div1") ||
     div.matches("div2") ||
-    div.matches("div3")
+    div.matches("div3") ||
+    div.matches("div4")
       ? (div.className += " grid-button")
       : 0;
 
@@ -159,9 +160,9 @@ export class Grid {
     this.currentScheme = randomScheme;
     this.currentVariant = randomVariant;
     this.currentHue = randHue();
+    this.canvasColors = [];
     /////////////////////////////////////////////////
     // ------ Grid Menu && Dom Selectors -----------------------------
-    this.gridButtons = this.gridContainer.querySelector(".grid-button");
     this.menu = this.gridContainer.parentElement.querySelector(".menu");
     this.modal = this.menu.querySelector(".grid-modal");
 
@@ -170,6 +171,7 @@ export class Grid {
     this.gridLockBtn = this.modal.children[0].children[0].children[1];
     this.randSchemeBtn = this.modal.children[0].children[0].children[2];
     this.randVariantBtn = this.modal.children[0].children[0].children[3];
+    this.canvasBtn = this.modal.children[0].children[0].children[4];
 
     // Modal button icons
     this.randHueIcon = this.randHueBtn.children[0];
@@ -230,11 +232,16 @@ export class Grid {
       menu: this.menu.querySelector(".text-container"),
       active: false
     };
+    this.canvasDropdown = {
+      menu: this.menu.querySelector("#canvas-prompt"),
+      active: false
+    };
 
     // List Li's
     this.schemeList = this.topDropdown.menu.children;
     this.variantList = this.sideDropdown.menu.children;
     this.gridSchemaText = this.hueDropdown.menu.children[0];
+    this.canvasText = this.canvasDropdown.menu;
 
     // Hex Dom Selectors
     this.hueText = this.gridSchemaText.querySelector(".hue-text");
@@ -536,6 +543,14 @@ export class Grid {
           changeColor(complementGrid, complementColor);
         }, 200);
       }
+      
+      this.canvasColors = [
+        bgColor,
+        primaryColor,
+        accentColor,
+        highlightColor,
+        complementColor
+      ];
 
       // Change rgb text to display current RGB colors
       function updateRGB() {
@@ -641,11 +656,18 @@ export function newGrid(obj) {
   let toggleScheme = toggleMenus.bind(obj.topDropdown.menu);
   let toggleVariant = toggleMenus.bind(obj.sideDropdown.menu);
   let toggleHue = toggleMenus.bind(obj.hueDropdown.menu);
+  let toggleCanvas = toggleMenus.bind(obj.canvasDropdown.menu);
+  // toggleHex does not have to be closed if others are opened
   let toggleHex = toggleMenu.bind(obj.hexDropdown);
 
   // Open menu and close other menus if open
   function toggleMenus() {
-    let menus = [obj.topDropdown, obj.sideDropdown, obj.hueDropdown];
+    let menus = [
+      obj.topDropdown,
+      obj.sideDropdown,
+      obj.hueDropdown,
+      obj.canvasDropdown
+    ];
     return menus.forEach(el => {
       if (el.active) {
         (el.menu.style.maxHeight = null),
@@ -678,6 +700,10 @@ export function newGrid(obj) {
           break;
         case obj.gridButtons[3]:
           toggleHex();
+          stopPulse();
+          break;
+        case obj.gridButtons[4]:
+          toggleCanvas();
           stopPulse();
           break;
       }
