@@ -23,6 +23,11 @@ checkboxVariant.onmousedown = event => {
 checkboxScheme.onmousedown = event => {
   event.preventDefault();
 };
+
+// Canvas variables
+let canvasActive = false;
+let canvasColors;
+
 ///////////////////////////////////////////////
 // End variables -------------------------------
 
@@ -93,6 +98,37 @@ function stopPulse() {
 // Get a random Hue
 function randHue() {
   return getRand(360);
+}
+
+/////////////////////////////////
+/// Canvas ---------------------
+const canvasWrapper = document.querySelector(".canvas-wrapper");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 500;
+canvas.height = 400;
+
+// arrange colors on canvas
+// send user to /colors
+// allow user to save image via jpg or png
+
+function toggleCanvas() {
+  // fill canvas with colors
+  ctx.fillStyle = canvasColors[0];
+  ctx.fillRect(0, 0, 500, 80);
+  ctx.fillStyle = canvasColors[1];
+  ctx.fillRect(0, 80, 500, 80);
+  ctx.fillStyle = canvasColors[2];
+  ctx.fillRect(0, 160, 500, 80);
+  ctx.fillStyle = canvasColors[3];
+  ctx.fillRect(0, 240, 500, 80);
+  ctx.fillStyle = canvasColors[4];
+  ctx.fillRect(0, 320, 500, 80);
+
+  canvasActive
+    ? ((canvasWrapper.style.display = "none"), (canvasActive = false))
+    : ((canvasActive = true), (canvasWrapper.style.display = "flex"));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -664,7 +700,7 @@ export function newGrid(obj) {
   let toggleScheme = toggleMenus.bind(obj.topDropdown.menu);
   let toggleVariant = toggleMenus.bind(obj.sideDropdown.menu);
   let toggleHue = toggleMenus.bind(obj.hueDropdown.menu);
-  let toggleCanvas = toggleMenus.bind(obj.canvasDropdown.menu);
+  let toggleCanvasMenu = toggleMenus.bind(obj.canvasDropdown.menu);
   // toggleHex does not have to be closed if others are opened
   let toggleHex = toggleMenu.bind(obj.hexDropdown);
 
@@ -711,7 +747,7 @@ export function newGrid(obj) {
           stopPulse();
           break;
         case obj.gridButtons[4]:
-          toggleCanvas();
+          toggleCanvasMenu();
           stopPulse();
           break;
       }
@@ -765,9 +801,11 @@ export function newGrid(obj) {
       );
     }
 
-    // Export canvasColors to canvas
+    // Export colors and open canvas
     if (event.target.parentElement.id === "canvas-prompt") {
-      console.log(obj.canvasColors);
+      canvasColors = obj.canvasColors;
+
+      toggleCanvas();
     }
 
     //Copy Hex to clipboard

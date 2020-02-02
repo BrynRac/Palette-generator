@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/head') %>
+  <body>
+    <header>
+      <div id="header-container">
+        <div class="logo-container">
+          <img id="logoImg" src="img/Logo.png" />
+          <span class="logo">Grid Schemer</span>
+        </div>
+        <div class="header-buttons">
+          <label>Randomize:</label>
+          <ul>
+            <li>
+              <span>Scheme</span>
+              <input
+                type="checkbox"
+                id="checkbox-scheme"
+                class="checkbox"
+                name="checkbox"
+              />
+            </li>
+            <li>
+              <span>Variant</span>
+              <input
+                type="checkbox"
+                id="checkbox-variant"
+                class="checkbox"
+                name="checkbox"
+              />
+            </li>
+            <li>
+              <span>Hue</span>
+              <input
+                type="checkbox"
+                id="checkbox-hue"
+                class="checkbox"
+                name="checkbox"
+              />
+            </li>
+          </ul>
+          <button id="start">Generate</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="content">
+      <img id="tutorial-Img" src="img/tutorial.png" />
+      <section class="add block">
+        <div id="sliderContainer0" class="slider-container"></div>
+        <section class="menu">
+          <section class="grid-modal">
+            <div class="modal-content">
+              <div class="modal-buttons">
+                <div id="modal1" class="modalBtn">
+                  <div class="fa fa-paint-brush fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Hue</div>
+                </div>
+                <div id="modal2" class="modalBtn">
+                  <div class="fa fa-lock fa-2x modal-icon"></div>
+                  <div class="modal-text">Lock</div>
+                </div>
+                <div id="modal3" class="modalBtn">
+                  <div class="fa fa-pie-chart fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Scheme</div>
+                </div>
+                <div id="modal4" class="modalBtn">
+                  <div class="fa fa-puzzle-piece fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Variant</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="text-container">
+            <div class="text-holder">
+              <div class="hue-text text">Hue:</div>
+              <div class="variant-text text">Variant:</div>
+              <div class="scheme-text text">Scheme:</div>
+            </div>
+            <div class="hue-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="360"
+                value="50"
+                id="hue-slider"
+              />
+            </div>
+          </aside>
+          <div class="top-dropdown">
+            <div id="block-title-container">
+              <ul id="schemes" class="dropdown">
+                <li>Contrast</li>
+                <li>Triade</li>
+                <li>Tetrade</li>
+                <li id="analogic-li">Analogic</li>
+                <div id="complement-button">
+                  Complement <br />
+                  (Analogic only)
+                </div>
+                <li>Monochromatic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="canvas-dropdown">
+            <ul id="canvas-prompt" class="dropdown">
+              <li>Export colors?</li>
+            </ul>
+          </div>
+          <div class="side-dropdown">
+            <ul id="variant" class="dropdown">
+              <li>Default</li>
+              <li>Pastel</li>
+              <li>Soft</li>
+              <li>Light</li>
+              <li>Hard</li>
+              <li>Pale</li>
+            </ul>
+          </div>
+          <div id="rgbWindow" class="rgbText-container dropdown">
+            <div class="rgbmenu">
+              <span id="bgText" class="rgbText">Background:</span>
+              <div id="bgBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="primaryText" class="rgbText">Primary:</span>
+              <div id="primaryBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="accentText" class="rgbText">Accent:</span>
+              <div id="accentBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="highlightText" class="rgbText">Highlight:</span>
+              <div id="highlightBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="complementText" class="rgbText">Complement: </span>
+              <div id="complementBlock" class="colorBlock"></div>
+            </div>
+          </div>
+        </section>
+        <div id="gridContainer0" class="grid-container closed-grid"></div>
+      </section>
+
+      <section class="add block">
+        <div id="sliderContainer1" class="slider-container"></div>
+        <section class="menu">
+          <section class="grid-modal">
+            <div class="modal-content">
+              <div class="modal-buttons">
+                <div id="modal1" class="modalBtn">
+                  <div class="fa fa-paint-brush fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Hue</div>
+                </div>
+                <div id="modal2" class="modalBtn">
+                  <div class="fa fa-lock fa-2x modal-icon"></div>
+                  <div class="modal-text">Lock</div>
+                </div>
+                <div id="modal3" class="modalBtn">
+                  <div class="fa fa-pie-chart fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Scheme</div>
+                </div>
+                <div id="modal4" class="modalBtn">
+                  <div class="fa fa-puzzle-piece fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Variant</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="text-container">
+            <div class="text-holder">
+              <div class="hue-text text">Hue:</div>
+              <div class="variant-text text">Variant:</div>
+              <div class="scheme-text text">Scheme:</div>
+            </div>
+            <div class="hue-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="360"
+                value="50"
+                id="hue-slider"
+              />
+            </div>
+          </aside>
+          <div class="top-dropdown">
+            <div id="block-title-container">
+              <ul id="schemes" class="dropdown">
+                <li>Contrast</li>
+                <li>Triade</li>
+                <li>Tetrade</li>
+                <li id="analogic-li">Analogic</li>
+                <div id="complement-button">
+                  Complement <br />
+                  (Analogic only)
+                </div>
+                <li>Monochromatic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="side-dropdown">
+            <ul id="variant" class="dropdown">
+              <li>Default</li>
+              <li>Pastel</li>
+              <li>Soft</li>
+              <li>Light</li>
+              <li>Hard</li>
+              <li>Pale</li>
+            </ul>
+          </div>
+
+          <div id="rgbWindow" class="rgbText-container dropdown">
+            <div class="rgbmenu">
+              <span id="bgText" class="rgbText">Background:</span>
+              <div id="bgBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="primaryText" class="rgbText">Primary:</span>
+              <div id="primaryBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="accentText" class="rgbText">Accent:</span>
+              <div id="accentBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="highlightText" class="rgbText">Highlight:</span>
+              <div id="highlightBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="complementText" class="rgbText">Complement: </span>
+              <div id="complementBlock" class="colorBlock"></div>
+            </div>
+          </div>
+        </section>
+        <div id="gridContainer1" class="grid-container closed-grid"></div>
+      </section>
+
+      <section class="add block">
+        <div id="sliderContainer2" class="slider-container"></div>
+        <section class="menu">
+          <section class="grid-modal">
+            <div class="modal-content">
+              <div class="modal-buttons">
+                <div id="modal1" class="modalBtn">
+                  <div class="fa fa-paint-brush fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Hue</div>
+                </div>
+                <div id="modal2" class="modalBtn">
+                  <div class="fa fa-lock fa-2x modal-icon"></div>
+                  <div class="modal-text">Lock</div>
+                </div>
+                <div id="modal3" class="modalBtn">
+                  <div class="fa fa-pie-chart fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Scheme</div>
+                </div>
+                <div id="modal4" class="modalBtn">
+                  <div class="fa fa-puzzle-piece fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Variant</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="text-container">
+            <div class="text-holder">
+              <div class="hue-text text">Hue:</div>
+              <div class="variant-text text">Variant:</div>
+              <div class="scheme-text text">Scheme:</div>
+            </div>
+            <div class="hue-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="360"
+                value="50"
+                id="hue-slider"
+              />
+            </div>
+          </aside>
+          <div class="top-dropdown">
+            <div id="block-title-container">
+              <ul id="schemes" class="dropdown">
+                <li>Contrast</li>
+                <li>Triade</li>
+                <li>Tetrade</li>
+                <li id="analogic-li">Analogic</li>
+                <div id="complement-button">
+                  Complement <br />
+                  (Analogic only)
+                </div>
+                <li>Monochromatic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="side-dropdown">
+            <ul id="variant" class="dropdown">
+              <li>Default</li>
+              <li>Pastel</li>
+              <li>Soft</li>
+              <li>Light</li>
+              <li>Hard</li>
+              <li>Pale</li>
+            </ul>
+          </div>
+
+          <div id="rgbWindow" class="rgbText-container dropdown">
+            <div class="rgbmenu">
+              <span id="bgText" class="rgbText">Background:</span>
+              <div id="bgBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="primaryText" class="rgbText">Primary:</span>
+              <div id="primaryBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="accentText" class="rgbText">Accent:</span>
+              <div id="accentBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="highlightText" class="rgbText">Highlight:</span>
+              <div id="highlightBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="complementText" class="rgbText">Complement: </span>
+              <div id="complementBlock" class="colorBlock"></div>
+            </div>
+          </div>
+        </section>
+        <div id="gridContainer2" class="grid-container closed-grid"></div>
+      </section>
+
+      <section class="add block">
+        <div id="sliderContainer3" class="slider-container"></div>
+        <section class="menu">
+          <section class="grid-modal">
+            <div class="modal-content">
+              <div class="modal-buttons">
+                <div id="modal1" class="modalBtn">
+                  <div class="fa fa-paint-brush fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Hue</div>
+                </div>
+                <div id="modal2" class="modalBtn">
+                  <div class="fa fa-lock fa-2x modal-icon"></div>
+                  <div class="modal-text">Lock</div>
+                </div>
+                <div id="modal3" class="modalBtn">
+                  <div class="fa fa-pie-chart fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Scheme</div>
+                </div>
+                <div id="modal4" class="modalBtn">
+                  <div class="fa fa-puzzle-piece fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Variant</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="text-container">
+            <div class="text-holder">
+              <div class="hue-text text">Hue:</div>
+              <div class="variant-text text">Variant:</div>
+              <div class="scheme-text text">Scheme:</div>
+            </div>
+            <div class="hue-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="360"
+                value="50"
+                id="hue-slider"
+              />
+            </div>
+          </aside>
+          <div class="top-dropdown">
+            <div id="block-title-container">
+              <ul id="schemes" class="dropdown">
+                <li>Contrast</li>
+                <li>Triade</li>
+                <li>Tetrade</li>
+                <li id="analogic-li">Analogic</li>
+                <div id="complement-button">
+                  Complement <br />
+                  (Analogic only)
+                </div>
+                <li>Monochromatic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="side-dropdown">
+            <ul id="variant" class="dropdown">
+              <li>Default</li>
+              <li>Pastel</li>
+              <li>Soft</li>
+              <li>Light</li>
+              <li>Hard</li>
+              <li>Pale</li>
+            </ul>
+          </div>
+
+          <div id="rgbWindow" class="rgbText-container dropdown">
+            <div class="rgbmenu">
+              <span id="bgText" class="rgbText">Background:</span>
+              <div id="bgBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="primaryText" class="rgbText">Primary:</span>
+              <div id="primaryBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="accentText" class="rgbText">Accent:</span>
+              <div id="accentBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="highlightText" class="rgbText">Highlight:</span>
+              <div id="highlightBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="complementText" class="rgbText">Complement: </span>
+              <div id="complementBlock" class="colorBlock"></div>
+            </div>
+          </div>
+        </section>
+        <div id="gridContainer3" class="grid-container closed-grid"></div>
+      </section>
+
+      <section class="add block">
+        <div id="sliderContainer4" class="slider-container"></div>
+        <section class="menu">
+          <section class="grid-modal">
+            <div class="modal-content">
+              <div class="modal-buttons">
+                <div id="modal1" class="modalBtn">
+                  <div class="fa fa-paint-brush fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Hue</div>
+                </div>
+                <div id="modal2" class="modalBtn">
+                  <div class="fa fa-lock fa-2x modal-icon"></div>
+                  <div class="modal-text">Lock</div>
+                </div>
+                <div id="modal3" class="modalBtn">
+                  <div class="fa fa-pie-chart fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Scheme</div>
+                </div>
+                <div id="modal4" class="modalBtn">
+                  <div class="fa fa-puzzle-piece fa-2x modal-icon"></div>
+                  <div class="modal-text">Random Variant</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="text-container">
+            <div class="text-holder">
+              <div class="hue-text text">Hue:</div>
+              <div class="variant-text text">Variant:</div>
+              <div class="scheme-text text">Scheme:</div>
+            </div>
+            <div class="hue-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="360"
+                value="50"
+                id="hue-slider"
+              />
+            </div>
+          </aside>
+          <div class="top-dropdown">
+            <div id="block-title-container">
+              <ul id="schemes" class="dropdown">
+                <li>Contrast</li>
+                <li>Triade</li>
+                <li>Tetrade</li>
+                <li id="analogic-li">Analogic</li>
+                <div id="complement-button">
+                  Complement <br />
+                  (Analogic only)
+                </div>
+                <li>Monochromatic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="side-dropdown">
+            <ul id="variant" class="dropdown">
+              <li>Default</li>
+              <li>Pastel</li>
+              <li>Soft</li>
+              <li>Light</li>
+              <li>Hard</li>
+              <li>Pale</li>
+            </ul>
+          </div>
+
+          <div id="rgbWindow" class="rgbText-container dropdown">
+            <div class="rgbmenu">
+              <span id="bgText" class="rgbText">Background:</span>
+              <div id="bgBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="primaryText" class="rgbText">Primary:</span>
+              <div id="primaryBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="accentText" class="rgbText">Accent:</span>
+              <div id="accentBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="highlightText" class="rgbText">Highlight:</span>
+              <div id="highlightBlock" class="colorBlock"></div>
+            </div>
+            <div class="rgbmenu">
+              <span id="complementText" class="rgbText">Complement: </span>
+              <div id="complementBlock" class="colorBlock"></div>
+            </div>
+          </div>
+        </section>
+        <div id="gridContainer4" class="grid-container closed-grid"></div>
+      </section>
+    </section>
+    <%- include('../partials/footer') %>
+    <div class="canvas-wrapper">
+      <div class="canvas-container">
+        <canvas id="canvas"></canvas>
+        <img src="" id="mirror" class="canvas__mirror" />
+        <div>
+          <a href="#" class="download-btn" id="jpgBtn">Jpg</a>
+          <a href="#" class="download-btn" id="pngBtn">Png</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

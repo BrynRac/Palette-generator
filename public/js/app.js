@@ -1,4 +1,4 @@
-import { Grid, newGrid } from "./functions.js";
+import { Grid, newGrid} from "./functions.js";
 
 // ///////////////////////////////////////////////
 // //---------------Imports-----------------------
