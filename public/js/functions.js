@@ -102,6 +102,7 @@ function randHue() {
 
 /////////////////////////////////
 /// Canvas ---------------------
+const fullModal = document.querySelector(".full-modal");
 const canvasWrapper = document.querySelector(".canvas-wrapper");
 const jpgBtn = document.getElementById("jpgBtn");
 const pngBtn = document.getElementById("pngBtn");
@@ -121,9 +122,8 @@ canvasWrapper.addEventListener("click", e => {
     : "";
 });
 
-function toggleCanvas() {
+function fillCanvas() {
   // fill canvas with colors
-  console.log(canvasColors.length);
   if (canvasColors.length === 4) {
     canvas.height = 320;
     ctx.fillStyle = canvasColors[0];
@@ -136,7 +136,6 @@ function toggleCanvas() {
     ctx.fillRect(0, 240, 500, 80);
   } else {
     canvas.height = 400;
-
     ctx.fillStyle = canvasColors[0];
     ctx.fillRect(0, 0, 500, 80);
     ctx.fillStyle = canvasColors[1];
@@ -148,12 +147,27 @@ function toggleCanvas() {
     ctx.fillStyle = canvasColors[4];
     ctx.fillRect(0, 320, 500, 80);
   }
-
-  canvasActive
-    ? ((canvasWrapper.style.display = "none"), (canvasActive = false))
-    : ((canvasActive = true), (canvasWrapper.style.display = "flex"));
+  setTimeout(() => {
+    toggleCanvas();
+  }, 100);
 }
 
+function toggleCanvas() {
+  canvasActive
+    ? ((canvasWrapper.style.display = "none"),
+      (fullModal.style.display = "none"),
+      (canvasActive = false))
+    : ((canvasActive = true),
+      (fullModal.style.display = "block"),
+      (canvasWrapper.style.display = "flex"));
+}
+// if canvas is active and user clicks anywhere but the canvas wrapper, close modal.
+document.addEventListener("click", e => {
+  e.preventDefault();
+  if (canvasActive) {
+    e.target !== canvasWrapper ? toggleCanvas() : "";
+  }
+});
 //////////////////////////////////////////////////////////////////////////
 //------------ Grid Class -----------------
 export class Grid {
@@ -827,7 +841,7 @@ export function newGrid(obj) {
     // Export colors and open canvas
     if (event.target.parentElement.id === "canvas-prompt") {
       canvasColors = obj.canvasColors;
-      toggleCanvas();
+      fillCanvas();
     }
 
     //Copy Hex to clipboard
