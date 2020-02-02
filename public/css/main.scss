@@ -391,7 +391,6 @@ button:focus {
 // Canvas dropdown
 
 .canvas-dropdown {
-   
   grid-column: 1;
   grid-row: 1;
   pointer-events: none;
@@ -405,6 +404,17 @@ button:focus {
   position: relative;
   max-height: 0;
   opacity: 0;
+
+  li {
+    a {
+      margin: 0;
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+  }
 }
 
 .gridtext {
@@ -420,7 +430,6 @@ button:focus {
     background-color: color(menu);
   }
 
-  
   // Dropdown hover -------------------
 
   .schemeHover {

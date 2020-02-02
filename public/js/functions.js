@@ -543,14 +543,22 @@ export class Grid {
           changeColor(complementGrid, complementColor);
         }, 200);
       }
-      
-      this.canvasColors = [
-        bgColor,
-        primaryColor,
-        accentColor,
-        highlightColor,
-        complementColor
-      ];
+
+      // Export colors for canvas
+      this.colorComplements
+        ? (this.canvasColors = [
+            bgColor,
+            primaryColor,
+            accentColor,
+            highlightColor,
+            complementColor
+          ])
+        : (this.canvasColors = [
+            bgColor,
+            primaryColor,
+            accentColor,
+            highlightColor
+          ]);
 
       // Change rgb text to display current RGB colors
       function updateRGB() {
@@ -755,6 +763,11 @@ export function newGrid(obj) {
           ? ((obj.currentVariant = val), obj.updateText(), obj.updateColors())
           : (obj.currentVariant = obj.currentVariant)
       );
+    }
+
+    // Export canvasColors to canvas
+    if (event.target.parentElement.id === "canvas-prompt") {
+      console.log(obj.canvasColors);
     }
 
     //Copy Hex to clipboard

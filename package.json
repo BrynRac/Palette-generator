@@ -2,12 +2,12 @@
   "name": "grid_schemer",
   "version": "1.0.0",
   "description": "Generate random color schemes based on different schemes, variations and hues.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
-    "dev": "nodemon index",
-    "deploy":"gh-pages -d app"
+    "start": "node server",
+    "dev": "nodemon server",
+    "deploy": "gh-pages -d app"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "homepage": "https://BrynRac.github.io//Grid-Schemer",
   "dependencies": {
     "color-scheme-js": "^1.0.6",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "gh-pages": "^2.1.1"
   },
