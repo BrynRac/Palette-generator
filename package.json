@@ -2,12 +2,12 @@
   "name": "grid_schemer",
   "version": "1.0.0",
   "description": "Generate random color schemes based on different schemes, variations and hues.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "dev": "nodemon server",
-    "deploy": "gh-pages -d app"
+    "start": "node index",
+    "dev": "nodemon index"
+    
   },
   "repository": {
     "type": "git",
