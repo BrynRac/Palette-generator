@@ -298,7 +298,6 @@ function toggleCanvas() {
 }
 // if canvas is active and user clicks anywhere but the canvas wrapper, close modal.
 document.addEventListener("click", e => {
-  e.preventDefault();
   if (canvasActive) {
     e.target !== canvasWrapper ? toggleCanvas() : "";
   }
