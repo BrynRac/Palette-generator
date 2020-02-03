@@ -272,15 +272,15 @@ function fillCanvas() {
     ctx.fillRect(320, 240, 80, 80);
 
     ctx.fillStyle = separated[4][0];
-    ctx.fillRect(0, 400, 80, 80);
+    ctx.fillRect(0, 320, 80, 80);
     ctx.fillStyle = separated[4][1];
-    ctx.fillRect(80, 400, 80, 80);
+    ctx.fillRect(80, 320, 80, 80);
     ctx.fillStyle = separated[4][2];
-    ctx.fillRect(160, 400, 80, 80);
+    ctx.fillRect(160, 320, 80, 80);
     ctx.fillStyle = separated[4][3];
-    ctx.fillRect(240, 400, 80, 80);
+    ctx.fillRect(240, 320, 80, 80);
     ctx.fillStyle = separated[4][4];
-    ctx.fillRect(320, 400, 80, 80);
+    ctx.fillRect(320, 320, 80, 80);
   }
   setTimeout(() => {
     toggleCanvas();

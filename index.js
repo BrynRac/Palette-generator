@@ -9,12 +9,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // set the view engine to ejs
 app.set("view engine", "ejs");
 
-app.get("/test", (req, res) => {
+app.get("/home", (req, res) => {
   res.render("pages/index", { title: "Grid Schemer" });
-});
-
-app.get("/colors", (req, res) => {
-  res.render("pages/colors", { title: "Grid Colors" });
 });
 
 app.listen(PORT, () => console.log(`Starting port ${PORT}...`));
