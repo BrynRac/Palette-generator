@@ -1,3 +1,7 @@
+// document.addEventListener("click", e => {
+//   console.log(e.target);
+// });
+
 // Global scheme and variant
 const schema = {
   id1: { scheme: "monochromatic", num: 4 },
@@ -100,7 +104,35 @@ function randHue() {
   return getRand(360);
 }
 
-/////////////////////////////////
+// Takes colors in Hex format and lights or darkens them by amt
+function LightenDarkenColor(col, amt) {
+  var usePound = false;
+
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
+  }
+
+  var num = parseInt(col, 16);
+
+  var r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  var b = ((num >> 8) & 0x00ff) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  var g = (num & 0x0000ff) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+}
+//////////////////////////////////////////////////////////////////////////
 /// Canvas ---------------------
 const fullModal = document.querySelector(".full-modal");
 const canvasWrapper = document.querySelector(".canvas-wrapper");
@@ -109,7 +141,7 @@ const pngBtn = document.getElementById("pngBtn");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 500;
+canvas.width = 400;
 
 // save canvas as image via jpg or png
 canvasWrapper.addEventListener("click", e => {
@@ -122,30 +154,133 @@ canvasWrapper.addEventListener("click", e => {
     : "";
 });
 
+function separatedColors() {
+
+  // seperates single color into 5 (2 darker, 2 lighter)
+  function arrangeColors(col) {
+    let arranged = [];
+    let num = -60;
+    while (arranged.length < 5) {
+      arranged.push(LightenDarkenColor(col, num));
+      num += 30;
+    }
+    return arranged;
+  }
+  let separatedColors = [];
+
+  canvasColors.map(color => {
+    separatedColors.push(arrangeColors(color));
+  });
+
+  return separatedColors;
+}
+
 function fillCanvas() {
   // fill canvas with colors
   if (canvasColors.length === 4) {
     canvas.height = 320;
-    ctx.fillStyle = canvasColors[0];
-    ctx.fillRect(0, 0, 500, 80);
-    ctx.fillStyle = canvasColors[1];
-    ctx.fillRect(0, 80, 500, 80);
-    ctx.fillStyle = canvasColors[2];
-    ctx.fillRect(0, 160, 500, 80);
-    ctx.fillStyle = canvasColors[3];
-    ctx.fillRect(0, 240, 500, 80);
+    let separated = separatedColors();
+
+    ctx.fillStyle = separated[0][0];
+    ctx.fillRect(0, 0, 80, 80);
+    ctx.fillStyle = separated[0][1];
+    ctx.fillRect(80, 0, 80, 80);
+    ctx.fillStyle = separated[0][2];
+    ctx.fillRect(160, 0, 80, 80);
+    ctx.fillStyle = separated[0][3];
+    ctx.fillRect(240, 0, 80, 80);
+    ctx.fillStyle = separated[0][4];
+    ctx.fillRect(320, 0, 80, 80);
+
+    ctx.fillStyle = separated[1][0];
+    ctx.fillRect(0, 80, 80, 80);
+    ctx.fillStyle = separated[1][1];
+    ctx.fillRect(80, 80, 80, 80);
+    ctx.fillStyle = separated[1][2];
+    ctx.fillRect(160, 80, 80, 80);
+    ctx.fillStyle = separated[1][3];
+    ctx.fillRect(240, 80, 80, 80);
+    ctx.fillStyle = separated[1][4];
+    ctx.fillRect(320, 80, 80, 80);
+
+    ctx.fillStyle = separated[2][0];
+    ctx.fillRect(0, 160, 80, 80);
+    ctx.fillStyle = separated[2][1];
+    ctx.fillRect(80, 160, 80, 80);
+    ctx.fillStyle = separated[2][2];
+    ctx.fillRect(160, 160, 80, 80);
+    ctx.fillStyle = separated[2][3];
+    ctx.fillRect(240, 160, 80, 80);
+    ctx.fillStyle = separated[2][4];
+    ctx.fillRect(320, 160, 80, 80);
+
+    ctx.fillStyle = separated[3][0];
+    ctx.fillRect(0, 240, 80, 80);
+    ctx.fillStyle = separated[3][1];
+    ctx.fillRect(80, 240, 80, 80);
+    ctx.fillStyle = separated[3][2];
+    ctx.fillRect(160, 240, 80, 80);
+    ctx.fillStyle = separated[3][3];
+    ctx.fillRect(240, 240, 80, 80);
+    ctx.fillStyle = separated[3][4];
+    ctx.fillRect(320, 240, 80, 80);
   } else {
+    let separated = separatedColors();
     canvas.height = 400;
-    ctx.fillStyle = canvasColors[0];
-    ctx.fillRect(0, 0, 500, 80);
-    ctx.fillStyle = canvasColors[1];
-    ctx.fillRect(0, 80, 500, 80);
-    ctx.fillStyle = canvasColors[2];
-    ctx.fillRect(0, 160, 500, 80);
-    ctx.fillStyle = canvasColors[3];
-    ctx.fillRect(0, 240, 500, 80);
-    ctx.fillStyle = canvasColors[4];
-    ctx.fillRect(0, 320, 500, 80);
+    ctx.fillStyle = separated[0][0];
+    ctx.fillRect(0, 0, 80, 80);
+    ctx.fillStyle = separated[0][1];
+    ctx.fillRect(80, 0, 80, 80);
+    ctx.fillStyle = separated[0][2];
+    ctx.fillRect(160, 0, 80, 80);
+    ctx.fillStyle = separated[0][3];
+    ctx.fillRect(240, 0, 80, 80);
+    ctx.fillStyle = separated[0][4];
+    ctx.fillRect(320, 0, 80, 80);
+
+    ctx.fillStyle = separated[1][0];
+    ctx.fillRect(0, 80, 80, 80);
+    ctx.fillStyle = separated[1][1];
+    ctx.fillRect(80, 80, 80, 80);
+    ctx.fillStyle = separated[1][2];
+    ctx.fillRect(160, 80, 80, 80);
+    ctx.fillStyle = separated[1][3];
+    ctx.fillRect(240, 80, 80, 80);
+    ctx.fillStyle = separated[1][4];
+    ctx.fillRect(320, 80, 80, 80);
+
+    ctx.fillStyle = separated[2][0];
+    ctx.fillRect(0, 160, 80, 80);
+    ctx.fillStyle = separated[2][1];
+    ctx.fillRect(80, 160, 80, 80);
+    ctx.fillStyle = separated[2][2];
+    ctx.fillRect(160, 160, 80, 80);
+    ctx.fillStyle = separated[2][3];
+    ctx.fillRect(240, 160, 80, 80);
+    ctx.fillStyle = separated[2][4];
+    ctx.fillRect(320, 160, 80, 80);
+
+    ctx.fillStyle = separated[3][0];
+    ctx.fillRect(0, 240, 80, 80);
+    ctx.fillStyle = separated[3][1];
+    ctx.fillRect(80, 240, 80, 80);
+    ctx.fillStyle = separated[3][2];
+    ctx.fillRect(160, 240, 80, 80);
+    ctx.fillStyle = separated[3][3];
+    ctx.fillRect(240, 240, 80, 80);
+    ctx.fillStyle = separated[3][4];
+    ctx.fillRect(320, 240, 80, 80);
+
+    ctx.fillStyle = separated[4][0];
+    ctx.fillRect(0, 400, 80, 80);
+    ctx.fillStyle = separated[4][1];
+    ctx.fillRect(80, 400, 80, 80);
+    ctx.fillStyle = separated[4][2];
+    ctx.fillRect(160, 400, 80, 80);
+    ctx.fillStyle = separated[4][3];
+    ctx.fillRect(240, 400, 80, 80);
+    ctx.fillStyle = separated[4][4];
+    ctx.fillRect(320, 400, 80, 80);
   }
   setTimeout(() => {
     toggleCanvas();
